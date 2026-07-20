@@ -1,0 +1,9 @@
+{
+  "name": "tk-daily-note",
+  "description": "A living Daily Note in TK: Claude creates a structured daily briefing (carry-over TODOs, weather, news, calendar, Linear asks, meeting pre-briefings) and updates it in place throughout the day. Steer it by writing instructions directly in the note.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Moishe Lettvin",
+    "email": "mlettvin@medium.com"
+  }
+}

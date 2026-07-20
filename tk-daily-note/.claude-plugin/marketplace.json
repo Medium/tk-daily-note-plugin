@@ -1,0 +1,14 @@
+{
+  "name": "tk-daily-note",
+  "owner": {
+    "name": "Moishe Lettvin",
+    "email": "mlettvin@medium.com"
+  },
+  "plugins": [
+    {
+      "name": "tk-daily-note",
+      "source": "./",
+      "description": "A living Daily Note in TK: Claude creates a structured daily briefing and updates it in place throughout the day. Steer it by writing instructions directly in the note."
+    }
+  ]
+}
