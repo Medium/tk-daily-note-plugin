@@ -19,12 +19,12 @@ All personalization (timezone, weather locations, news interests, Linear scope, 
 
 ## Install
 
-**Claude Cowork:** Customize menu → **Plugins** tab → **+** in Personal plugins → **Add marketplace from GitHub** → enter this repo (`Moishe/tk-daily-note`) → install the `tk-daily-note` plugin.
+**Claude Cowork:** Customize menu → **Plugins** tab → **+** in Personal plugins → **Add marketplace from GitHub** → enter this repo (`Medium/tk-daily-note`) → install the `tk-daily-note` plugin.
 
 **Claude Code:**
 
 ```
-/plugin marketplace add Moishe/tk-daily-note
+/plugin marketplace add Medium/tk-daily-note
 /plugin install tk-daily-note@tk-daily-note
 ```
 
