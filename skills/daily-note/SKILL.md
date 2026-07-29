@@ -11,17 +11,17 @@ You are usually running unattended on a schedule. Don't ask questions; make sens
 
 ## The two documents
 
-1. **Today's Daily Note** — titled exactly `Daily Note - {Month D, YYYY}` (e.g., `Daily Note - July 19, 2026`), tagged `daily-note`. If the user has a TK library named "Daily Notes", the note lives there; otherwise it's a personal doc.
+1. **Today's Daily Note** — the user's *real* TK daily note for today: the dated journal entry the app shows at `/daily-notes`, keyed by date rather than found by search. Its title and leading H1 are always the formatted date (e.g. `July 29, 2026`) — the daily-note tools enforce this; you never set a title. Access it with `get_daily_note` / `create_daily_note`. It is personal by design: never add it to a library.
 2. **Daily Note Memory** — a TK doc titled `Daily Note Memory`, tagged `daily-note-memory`. Holds the user's preferences and rules you've learned from their instructions. Read it at the start of every run; everything user-specific (locations, interests, work hours, section tweaks) lives here, not in this skill — that's what makes the skill shareable while the behavior stays personal.
 
 ## Every run
 
-1. Get the current local date and time (run `date` in bash). You'll need it for the title and for timestamping additions.
+1. Get the current local date and time (run `date` in bash). The date is load-bearing: both daily-note tools require it as `YYYY-MM-DD` in the user's local timezone — the server has no timezone and will not guess "today".
 2. Find the memory note: `search_documents` with query `Daily Note Memory` and `tags: ["daily-note-memory"]`. The tag is the reliable signal — `search_documents` requires a query string but title matching is fuzzy, so trust the tag filter over text relevance. If no memory note exists, create it from the template in `references/memory-template.md` and continue with defaults.
-3. Find today's note the same way: `search_documents` with `tags: ["daily-note"]` (or `get_library_documents` on the "Daily Notes" library if it exists — IDs via `get_user_libraries`), then pick the doc whose title is exactly today's. Yesterday's note is input, not the target.
+3. Fetch today's note: `get_daily_note` with `date` set to today's local date from step 1 and `format: "json"` — the JSON carries the node ids (`attrs.id`) that update mode's `edit_document` ops target, so one call is both the existence check and the fetch. Yesterday's note is input, not the target.
 4. Branch:
-   - **No note for today** → create mode. Read `references/create.md` and follow it.
-   - **Note exists** → update mode. Read `references/update.md` and follow it.
+   - **`found: false`** → create mode. Read `references/create.md` and follow it.
+   - **`found: true`** → update mode. Read `references/update.md` and follow it.
 
 ## Principles (both modes)
 
