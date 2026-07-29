@@ -1,6 +1,6 @@
 # Update mode — refreshing today's note
 
-The user may be editing this note right now. Fetch it with `get_document_content` using `format: "json"` — you need the node UUIDs (`attrs.id`) to make targeted edits. All changes go through `edit_document` ops (`replace_node_text`, `replace_node_contents`, `insert_sibling_node`, `delete_node`), which merge safely with the user's concurrent edits. Never `update_document` this doc.
+The user may be editing this note right now. You already have its JSON from the every-run fetch (`get_daily_note` with `format: "json"`); the node UUIDs (`attrs.id`) in it are what your edits target. Re-fetch the same way if you need fresher state. All changes go through `edit_document` ops (`replace_node_text`, `replace_node_contents`, `insert_sibling_node`, `delete_node`), which merge safely with the user's concurrent edits. Never `update_document` this doc.
 
 ## 1. Process "Notes to Claude" first
 
