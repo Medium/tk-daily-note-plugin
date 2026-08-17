@@ -19,7 +19,11 @@ All personalization (timezone, weather locations, news interests, Linear scope, 
 
 ## Install
 
-**Claude Cowork:** Customize menu → **Plugins** tab → **+** in Personal plugins → **Add marketplace from GitHub** → enter this repo (`Medium/tk-daily-note-plugin`) → install the `tk-daily-note` plugin.
+**Claude Cowork:** open **Customize** in the left sidebar → **Plugins** tab → **+** in the Personal plugins section → **Add marketplace** → choose **Add from a repository** (*not* "Browse Anthropic sources" — that searches Anthropic's curated catalog only and won't find this repo) → paste `https://github.com/Medium/tk-daily-note-plugin` → install the **tk-daily-note** plugin.
+
+(There's no longer a separate Cowork tab — chat and Cowork share the Home tab, and you switch between them with the selector in the bottom-left of the message box. Plugins install once and apply to your Cowork sessions on desktop, web, and mobile.)
+
+You'll see a warning that plugins from a personal marketplace aren't reviewed by Anthropic — expected for any repo-hosted plugin. After installing, open the plugin to confirm the `daily-note` skill is listed and enabled.
 
 **Claude Code:**
 
