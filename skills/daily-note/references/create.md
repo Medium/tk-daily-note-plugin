@@ -1,6 +1,13 @@
 # Create mode — first run of the day
 
-Build the full note, then create it with `create_daily_note`: `date` is today's local `YYYY-MM-DD`, `content` is the briefing body in markdown **without a title heading** (the tool adds the date H1 itself), tag `daily-note`. There is no title, library, or collapsed-sections parameter — the note is the user's real dated journal entry, and its heading, privacy, and layout are the daily-note system's to manage.
+Build the full note, then create it with `create_daily_note`, passing:
+
+- `date`: today's local `YYYY-MM-DD`
+- `content`: the briefing body in markdown **without a title heading** (the note's heading is added for you, along with any sections from the user's daily-note template)
+- `tags`: `["daily-note"]`
+- `skip_writing_prompt`: `true` — this note is a generated briefing, so the daily writing prompt would be noise. If the call is rejected because `skip_writing_prompt` is not a valid parameter (older TK servers), retry once without it.
+
+There is no title, library, or collapsed-sections parameter — the note is the user's real dated journal entry, and its heading, privacy, and layout are the daily-note system's to manage.
 
 **If `create_daily_note` fails because today already has a note** — the app seeds one the moment the user opens the day, so this is routine, not an error in your run — do not retry. The error carries the existing note's id. Adopt instead, and let the JSON tell you which of two states the note is in (`get_daily_note` with `format: "json"`):
 
@@ -20,7 +27,7 @@ Starts nearly empty — a one-line invitation:
 If yesterday's note had unprocessed instructions (lines not marked ✓), carry them here unmarked so they still get handled.
 
 ### TODO
-Find the most recent prior daily note by calling `get_daily_note` for yesterday, then the day before, back up to a week — `found: false` days (weekends, gaps) just mean keep looking. A prior day may be a plain journal entry with no TODO section; that's fine, there's nothing to carry from it. (Very first run ever: if the user has a predecessor briefing system — e.g. "Morning Brief" docs, or `Daily Note - …` docs from an older version of this skill, findable via `search_documents` with `tags: ["daily-note"]` — it's fine to seed carry-over todos from the latest of those instead.) Carry over unchecked todos verbatim; drop ones that clearly expired ("prep for Tuesday's board meeting" after Tuesday); add new ones implied by today's inputs — explicit asks of the user found in email, Slack, or Linear. Use markdown task checkboxes (`- [ ]`) so the user can check items off. Link each carried or discovered item to its source.
+Find the most recent prior daily note by calling `get_daily_note` for yesterday, then the day before, back up to a week — `found: false` days (weekends, gaps) just mean keep looking. **Except:** a `found: false` answer that names an `older_note` means that day has an older-style dated note. Read it with `get_document_content` (its `id`) and use it as that day's note for carry-over. Only read it — never write into an `older_note`. A prior day may be a plain journal entry with no TODO section; that's fine, there's nothing to carry from it. (Very first run ever: if the user has a predecessor briefing system — e.g. "Morning Brief" docs, or `Daily Note - …` docs from an older version of this skill, findable via `search_documents` with `tags: ["daily-note"]` — it's fine to seed carry-over todos from the latest of those instead.) Carry over unchecked todos verbatim; drop ones that clearly expired ("prep for Tuesday's board meeting" after Tuesday); add new ones implied by today's inputs — explicit asks of the user found in email, Slack, or Linear. Use markdown task checkboxes (`- [ ]`) so the user can check items off. Link each carried or discovered item to its source.
 
 Scanning for asks: in email, look at the last 2-3 days of the inbox and ignore automated digests/notification mail — you're after review requests and direct human asks. In Slack, search for mentions of the user and recent DMs, excluding bot traffic (`to:me` alone mostly returns bot noise).
 
