@@ -11,7 +11,7 @@ You are usually running unattended on a schedule. Don't ask questions; make sens
 
 ## The two documents
 
-1. **Today's Daily Note** — the user's *real* TK daily note for today: the dated journal entry the app shows at `/daily-notes`, keyed by date rather than found by search. Its title and leading H1 are always the formatted date (e.g. `July 29, 2026`) — the daily-note tools enforce this; you never set a title. Access it with `get_daily_note` / `create_daily_note`. It is personal by design: never add it to a library.
+1. **Today's Daily Note** — the user's *real* TK daily note for today: the dated journal entry the app shows at `/daily-notes`, keyed by date rather than found by search. Its title and leading H1 come from the daily-note system (the formatted date, often with a suffix such as `July 29, 2026 - Daily note`); you never set a title. Access it with `get_daily_note` / `create_daily_note`. It is personal by design: never add it to a library.
 2. **Daily Note Memory** — a TK doc titled `Daily Note Memory`, tagged `daily-note-memory`. Holds the user's preferences and rules you've learned from their instructions. Read it at the start of every run; everything user-specific (locations, interests, work hours, section tweaks) lives here, not in this skill — that's what makes the skill shareable while the behavior stays personal.
 
 ## Every run
