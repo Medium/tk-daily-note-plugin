@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tk": {
+      "type": "http",
+      "url": "https://tk.xyz/mcp"
+    }
+  }
+}
